@@ -1,0 +1,26 @@
+name: Get and cache dependencies
+description: |
+  This action retrieves dependencies from a specified path and caches them for future use.
+inputs:
+  cache-path:
+    description: The path to the dependencies to cache
+    required: true
+    default: ./node_modules
+  cache-key:
+    description: The key to use for caching the dependencies
+    required: true
+    default: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json') }}
+runs:
+  using: "composite"
+  steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ inputs.cache-path }}
+        key: ${{ inputs.cache-key }}
+    - name: Installing dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm ci
+      shell: bash
