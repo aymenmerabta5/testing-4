@@ -13,9 +13,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Check out repository
+    - name: Get code
       uses: actions/checkout@v4
     - name: Cache dependencies
+      id: cache
       uses: actions/cache@v4
       with:
         path: ${{ inputs.cache-path }}
