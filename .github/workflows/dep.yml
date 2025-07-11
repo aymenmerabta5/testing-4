@@ -1,0 +1,8 @@
+name: Trying js
+on: push
+jobs:
+  trial:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output message
+        uses: ./.github/actions/js-trial

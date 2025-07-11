@@ -1,0 +1,6 @@
+name: Trying out JS Here
+description: |
+  This action runs a JavaScript trial to test the functionality of the code.
+runs:
+  using: "node20"
+  main: index.js
